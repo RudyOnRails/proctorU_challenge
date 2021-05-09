@@ -17,7 +17,7 @@ describe 'api/v1/exam_registrations.json', type: :request do
     end
 
     fit "returns 200 with good params" do
-      get('/api/v1/exam_registrations.json', params)
+      get('/api/v1/exam_registrations.json', params: valid_attributes)
       expect(response).to have_http_status :ok
     end
   end
