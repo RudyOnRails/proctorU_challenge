@@ -16,10 +16,13 @@ describe 'api/v1/exam_registrations.json', type: :request do
       }
     end
     
-    it "returns 400 when first_name is missing" do
-      get('/api/v1/exam_registrations', params: valid_attributes.except(:first_name), as: :json)
-      expect(response).to have_http_status 400
+    %i[first_name last_name phone_number college_id exam_id].each do |param|
+      it "returns 400 when #{param} is missing" do
+        get('/api/v1/exam_registrations', params: valid_attributes.except(param), as: :json)
+        expect(response).to have_http_status 400
+      end
     end
+
 
   end
 end

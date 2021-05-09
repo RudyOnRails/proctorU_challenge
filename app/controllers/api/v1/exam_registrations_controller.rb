@@ -11,7 +11,7 @@ class Api::V1::ExamRegistrationsController < ApplicationController
   private
     def exam_registration_params
       params.require(:exam_registration).tap do |params|
-        params.require(:first_name)
+        params.require(%i[first_name last_name phone_number college_id exam_id])
       end
     end
 end
