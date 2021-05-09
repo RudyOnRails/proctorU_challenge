@@ -16,9 +16,15 @@ describe 'api/v1/exam_registrations.json', type: :request do
       }
     end
 
-    fit "returns 200 with good params" do
+    it "returns 200 with good params" do
       get('/api/v1/exam_registrations', params: valid_attributes, as: :json)
-      expect(response).to have_http_status :ok
+      expect(response).to have_http_status 200
     end
+    
+    it "returns 400 when first_name is missing" do
+      get('/api/v1/exam_registrations', params: valid_attributes.except(:first_name), as: :json)
+      expect(response).to have_http_status 400
+    end
+
   end
 end
