@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-describe 'api/v1/exam_registrations.json' do
-  describe 'POST' do
+describe 'api/v1/exam_registrations.json', type: :request do
+  describe 'POST /create' do
 
     let(:college) { College.create }
     let(:exam)    { college.exams.create(start_time: 3.days.ago, end_time: 1.days.from_now) }
-    let(:params) do
+
+    let(:valid_attributes) do
       {
         first_name: "Kevin",
         last_name: "Musiorski",
