@@ -7,7 +7,7 @@ class Api::V1::ExamRegistrationsController < ApplicationController
   end
 
   def create
-    @user = User.find_or_create_by(first_name: exam_registration_params[:first_name])
+    @user = User.create_or_find_by(first_name: exam_registration_params[:first_name])
 
     if @user.save
       render json: "#{@user.first_name} assigned to exam #{@exam.id}".to_json, status: 200
