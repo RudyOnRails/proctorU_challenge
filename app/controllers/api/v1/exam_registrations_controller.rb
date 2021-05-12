@@ -32,7 +32,9 @@ class Api::V1::ExamRegistrationsController < ApplicationController
         id = exam_registration_params[:exam_id]
         @exam = Exam.find(id)
       rescue ActiveRecord::RecordNotFound
-        render json: "Exam id #{id} not found".to_json, status: 400
+        render json: "Exam #{id} not found".to_json, status: 400
+      else
+        render json: "Exam #{id} does not belong to College #{@college.id}".to_json, status: 400 if @exam.college_id != @college.id
       end
     end
 end
