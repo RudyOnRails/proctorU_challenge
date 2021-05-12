@@ -17,9 +17,10 @@ describe 'api/v1/exam_registrations.json', type: :request do
     end
     
     %i[first_name last_name phone_number college_id exam_id].each do |param|
-      it "returns 400 when #{param} is missing" do
-        get('/api/v1/exam_registrations', params: valid_attributes.except(param), as: :json)
+      it "returns detailed 400 when #{param} is missing" do
+        post('/api/v1/exam_registrations.json', params: valid_attributes.except(param))
         expect(response).to have_http_status 400
+        expect(response.body).to include(param.to_s)
       end
     end
 
