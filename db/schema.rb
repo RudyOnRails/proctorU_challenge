@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_05_12_060031) do
 
   create_table "api_requests", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.string "endpoint"
     t.string "remote_ip"
     t.string "payload"

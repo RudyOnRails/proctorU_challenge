@@ -8,7 +8,6 @@ class ApplicationController < ActionController::API
   private
     def log_api_request
       ApiRequest.create(
-        # user: api_user,
         endpoint: request.fullpath,
         remote_ip: request.remote_ip,
         payload: params,
