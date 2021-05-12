@@ -16,7 +16,7 @@ describe 'api/v1/exam_registrations.json', type: :request do
       }
     end
 
-    fit "returns 200 when request is perfect" do
+    it "returns 200 when request is perfect" do
       post('/api/v1/exam_registrations.json', params: valid_attributes)
       expect(response).to have_http_status 200
     end
