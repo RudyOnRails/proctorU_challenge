@@ -29,7 +29,7 @@ describe 'api/v1/exam_registrations.json', type: :request do
       end
     end
     
-    it "returns 400 when college_id is not found" do
+    fit "returns 400 when college_id is not found" do
       post('/api/v1/exam_registrations.json', params: valid_attributes.merge(college_id: "888"))
       expect(response).to have_http_status 400
     end
