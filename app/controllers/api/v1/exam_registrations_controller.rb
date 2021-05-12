@@ -2,10 +2,6 @@ class Api::V1::ExamRegistrationsController < ApplicationController
 
   before_action :get_college, :get_exam
 
-  rescue_from ActionController::ParameterMissing do |e|
-    render json: e.message.to_json, status: 400
-  end
-
   def create
     @user = User.create_or_find_by(first_name: exam_registration_params[:first_name])
 
