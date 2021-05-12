@@ -1,6 +1,6 @@
 class Api::V1::ExamRegistrationsController < ApplicationController
 
-  before_action :get_college
+  before_action :get_college, :get_exam
 
   rescue_from ActionController::ParameterMissing do |e|
     render json: e.message.to_json, status: 400
@@ -24,6 +24,15 @@ class Api::V1::ExamRegistrationsController < ApplicationController
         @college = College.find(id)
       rescue ActiveRecord::RecordNotFound
         render json: "College id #{id} not found".to_json, status: 400
+      end
+    end
+
+    def get_exam
+      begin
+        id = exam_registration_params[:exam_id]
+        @exam = Exam.find(id)
+      rescue ActiveRecord::RecordNotFound
+        render json: "Exam id #{id} not found".to_json, status: 400
       end
     end
 end
