@@ -10,8 +10,8 @@ class Api::V1::ExamRegistrationsController < ApplicationController
 
   private
     def exam_registration_params
-      params.require(:exam_registration).tap do |params|
-        params.require(%i[first_name last_name phone_number college_id exam_id])
+      [:first_name, :last_name, :phone_number, :college_id, :exam_id].each_with_object(params) do |key, obj|
+        obj.require(key)
       end
     end
 end
