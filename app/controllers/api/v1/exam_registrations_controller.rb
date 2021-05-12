@@ -1,7 +1,7 @@
 class Api::V1::ExamRegistrationsController < ApplicationController
 
-  rescue_from ActionController::ParameterMissing do
-    head :bad_request
+  rescue_from ActionController::ParameterMissing do |e|
+    render json: e.message, status: 400
   end
 
   def create
