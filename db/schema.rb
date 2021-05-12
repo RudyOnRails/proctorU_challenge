@@ -30,9 +30,12 @@ ActiveRecord::Schema.define(version: 2021_05_09_051153) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
+    t.integer "exam_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_users_on_exam_id"
   end
 
   add_foreign_key "exams", "colleges"
+  add_foreign_key "users", "exams"
 end
