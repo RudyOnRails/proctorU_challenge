@@ -6,6 +6,7 @@ class Api::V1::ExamRegistrationsController < ApplicationController
 
   def create
     user = User.find_or_create_by(first_name: exam_registration_params[:first_name])
+    head :ok
   end
 
   private
