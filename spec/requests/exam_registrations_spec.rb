@@ -15,6 +15,11 @@ describe 'api/v1/exam_registrations.json', type: :request do
         exam_id: exam.id,
       }
     end
+
+    fit "returns 200 when request is perfect" do
+      post('/api/v1/exam_registrations.json', params: valid_attributes)
+      expect(response).to have_http_status 200
+    end
     
     %i[first_name last_name phone_number college_id exam_id].each do |param|
       it "returns detailed 400 when #{param} is missing" do
