@@ -14,6 +14,7 @@ describe 'api/v1/exam_registrations.json', type: :request do
         phone_number: "13127725636",
         college_id: college.id,
         exam_id: exam.id,
+        start_time: Time.now
       }
     end
 
@@ -47,6 +48,11 @@ describe 'api/v1/exam_registrations.json', type: :request do
       post('/api/v1/exam_registrations.json', params: valid_attributes.merge(exam_id: exam2.id))
       expect(response).to have_http_status 400
       expect(response.body).to include("Exam #{exam2.id} does not belong to College #{college.id}")
+    end
+    
+    it "returns 400 when requested start_time does not fall within an exam's time window" do
+      post('/api/v1/exam_registrations.json', params: valid_attributes.merge(start_time: 5.days.ago))
+      expect(response).to have_http_status 400
     end
   end
 end
