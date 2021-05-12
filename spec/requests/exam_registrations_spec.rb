@@ -31,19 +31,22 @@ describe 'api/v1/exam_registrations.json', type: :request do
       end
     end
     
-    it "returns 400 when college_id is not found" do
-      post('/api/v1/exam_registrations.json', params: valid_attributes.merge(college_id: "888"))
+    it "returns detailed 400 when college_id is not found" do
+      post('/api/v1/exam_registrations.json', params: valid_attributes.merge(college_id: "xyz123"))
       expect(response).to have_http_status 400
+      expect(response.body).to include("College id xyz123 not found")
     end
     
     it "returns 400 when exam_id is not found" do
-      post('/api/v1/exam_registrations.json', params: valid_attributes.merge(exam_id: exam.id + 1))
+      post('/api/v1/exam_registrations.json', params: valid_attributes.merge(exam_id: "abc123"))
       expect(response).to have_http_status 400
+      expect(response.body).to include("Exam abc123 not found")
     end
     
     it "returns 400 when exam_id does not belong to college" do
       post('/api/v1/exam_registrations.json', params: valid_attributes.merge(exam_id: exam2.id))
       expect(response).to have_http_status 400
+      expect(response.body).to include("Exam #{exam2.id} does not belong to College #{college.id}")
     end
   end
 end
